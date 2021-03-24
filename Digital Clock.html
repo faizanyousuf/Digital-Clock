@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+</head>
+
+<body>
+    <style>
+        #container {
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 100px;
+            margin: auto;
+            width: 50%;
+            border-radius: 25px;
+        }
+        
+        #p1 {
+            background-color: cyan;
+            color: black;
+            border-radius: 25px;
+        }
+        
+        body {
+            /* background-color: cyan; */
+            background-image: url(images/index.jpeg);
+        }
+        
+        button {
+            background-color: cyan;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-weight: bolder;
+            padding-right: 1em;
+            padding-left: 1em;
+            padding-top: 0.2em;
+            padding-bottom: 0.2em;
+        }
+        
+        #btn1 {
+            margin-right: 2em;
+        }
+    </style>
+    <div id="container">
+        <h1 id="p1">Digital Clock</h1>
+        <h1 id="clock"></h1>
+        <button id="btn1" onclick="start()">Start</button>
+        <button id="btn2" onclick="stop()">Stop</button>
+
+    </div>
+    <script>
+        function clock() {
+            let a = new Date();
+            let h = a.getHours();
+            let m = a.getMinutes();
+            let s = a.getSeconds();
+            let session = "AM"
+
+            let yr = a.getFullYear();
+            let mth = a.getMonth();
+            let day = a.getUTCDate();
+
+            if (h >= 12) {
+                h -= 12;
+                session = "PM"
+
+            }
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+
+            // if (h == 0) {
+            //     h = 12;
+
+            // }
+
+            mth = (mth < 10) ? "0" + mth : mth;
+            day = (day < 10) ? "0" + day : day;
+
+
+            time = h + ":" + m + ":" + s + " " + session;
+            date = yr + "/" + mth + "/" + day;
+            document.getElementById('clock').innerHTML = time + "<br>" + date;
+
+            setTimeout(() => {
+                // clock();
+            }, 1000);
+
+
+        }
+        clock();
+        let timer;
+
+        function start() {
+            timer = setInterval(clock, 1000)
+
+        }
+
+        function stop() {
+            clearInterval(timer);
+
+        }
+    </script>
+</body>
+
+</html>
